@@ -239,6 +239,34 @@
   #siteHeader.is-scrolled .nav-cta{ background:#14201C; color:#F5F3EE; border-color:transparent; box-shadow:none; }
   #siteHeader.is-scrolled .nav-cta:hover{ background:#2B5C4C; }
   #siteHeader.is-scrolled .mobile-toggle{ background:#FFFFFF; border-color:#E4E0D6; color:#14201C; }
+
+  /* 5'li Hero Banner Slider Geçişleri */
+  .hero-slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .75s ease, transform .85s ease;
+    transform:scale(1.02);
+    z-index:1;
+  }
+  .hero-slide.active{
+    opacity:1;
+    pointer-events:auto;
+    transform:scale(1);
+    z-index:2;
+  }
+  .hero-dot{
+    width:10px;
+    height:10px;
+    border-radius:9999px;
+    background:rgba(255,255,255,.35);
+    transition:width .3s ease, background .3s ease;
+  }
+  .hero-dot.active{
+    width:32px;
+    background:#7ED4AD;
+  }
   @media (prefers-reduced-motion:reduce){ *,*::before,*::after{ transition:none!important; animation:none!important; scroll-behavior:auto!important; } }
 </style>
 </head>
@@ -302,63 +330,208 @@
   </header>
 
   <main>
-  <!-- 1. ANA SAYFA (Tam Ekran Mimari Hero) -->
-  <section id="anasayfa" class="relative overflow-hidden bg-ink border-b hairline min-h-[640px] lg:min-h-[730px] flex items-center">
-    <!-- Tam Ekran Arka Plan Görseli (Batman Modern Site Dairesi) -->
-    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1600&q=80" alt="Batman’da temizlenmiş ferah ve aydınlık daire salonu" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover object-center">
-    <!-- Okunabilirlik İçin Zümrüt & Koyu Gradyan Katmanı -->
-    <div class="absolute inset-0" style="background: linear-gradient(100deg, rgba(16, 32, 26, 0.92) 0%, rgba(16, 32, 26, 0.78) 46%, rgba(16, 32, 26, 0.34) 100%);"></div>
+  <!-- 1. ANA SAYFA (5 Bannerlı Tam Ekran Hero Slider) -->
+  <section id="anasayfa" class="relative overflow-hidden bg-ink border-b hairline min-h-[660px] lg:min-h-[750px] flex flex-col justify-between cursor-grab active:cursor-grabbing select-none" style="touch-action: pan-y;">
+    <!-- Arka Plan Slaytları (Görsel + Koyu Zümrüt Gradyan) -->
+    <div id="heroSlidesBg" class="absolute inset-0 pointer-events-none">
+      <!-- Slide 1 BG -->
+      <div class="hero-slide active" data-slide="0">
+        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1600&q=85" alt="Batman’da temizlenmiş ferah ve aydınlık daire salonu" draggable="false" fetchpriority="high" decoding="async" class="w-full h-full object-cover object-center">
+        <div class="absolute inset-0" style="background: linear-gradient(100deg, rgba(16, 32, 26, 0.93) 0%, rgba(16, 32, 26, 0.78) 48%, rgba(16, 32, 26, 0.34) 100%);"></div>
+      </div>
+      <!-- Slide 2 BG -->
+      <div class="hero-slide" data-slide="1">
+        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=80" alt="Eşyalı evlerde günlük detaylı salon ve parke temizliği" loading="lazy" decoding="async" class="w-full h-full object-cover object-center">
+        <div class="absolute inset-0" style="background: linear-gradient(100deg, rgba(16, 32, 26, 0.93) 0%, rgba(16, 32, 26, 0.78) 48%, rgba(16, 32, 26, 0.34) 100%);"></div>
+      </div>
+      <!-- Slide 3 BG -->
+      <div class="hero-slide" data-slide="2">
+        <img src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1600&q=80" alt="İnşaat ve tadilat sonrası çiziksiz mutfak ve yüzey temizliği" loading="lazy" decoding="async" class="w-full h-full object-cover object-center">
+        <div class="absolute inset-0" style="background: linear-gradient(100deg, rgba(16, 32, 26, 0.93) 0%, rgba(16, 32, 26, 0.78) 48%, rgba(16, 32, 26, 0.34) 100%);"></div>
+      </div>
+      <!-- Slide 4 BG -->
+      <div class="hero-slide" data-slide="3">
+        <img src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1600&q=80" alt="Batman yeni konut sitelerinde boş ev ve cam balkon temizliği" loading="lazy" decoding="async" class="w-full h-full object-cover object-center">
+        <div class="absolute inset-0" style="background: linear-gradient(100deg, rgba(16, 32, 26, 0.93) 0%, rgba(16, 32, 26, 0.78) 48%, rgba(16, 32, 26, 0.34) 100%);"></div>
+      </div>
+      <!-- Slide 5 BG -->
+      <div class="hero-slide" data-slide="4">
+        <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=85" alt="Ofis ve işyerleri için düzenli kurumsal hijyen" loading="lazy" decoding="async" class="w-full h-full object-cover object-center">
+        <div class="absolute inset-0" style="background: linear-gradient(100deg, rgba(16, 32, 26, 0.93) 0%, rgba(16, 32, 26, 0.78) 48%, rgba(16, 32, 26, 0.34) 100%);"></div>
+      </div>
+    </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-8 pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-20 lg:pb-24">
-      <div class="max-w-2xl min-w-0 text-white">
-        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[12px] font-medium text-white/90 mb-5 sm:mb-6">
-          <span class="w-2 h-2 rounded-full bg-[#6EE7B7] shrink-0"></span>
-          Batman’da özenli temizlik hizmetleri
-        </div>
+    <!-- Ön Plan İçerik Alanı -->
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-8 pt-28 sm:pt-32 lg:pt-36 pb-12 sm:pb-16 flex-1 flex flex-col justify-between">
+      <div class="max-w-2xl min-w-0 text-white my-auto">
+        <!-- Slayt Metinleri (5 Banner) -->
+        <div id="heroContentSlides" class="relative">
+          <!-- Banner 1: Genel Marka & Güven -->
+          <div class="hero-copy-slide" data-copy="0">
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11.5px] font-semibold uppercase tracking-[.12em] text-white/95 mb-5">
+              Batman Merkez'de Randevulu Hizmet
+            </div>
+            <h1 class="font-serif text-[2.45rem] sm:text-5xl xl:text-[4.2rem] leading-[1.04] tracking-tightest text-white mb-5">
+              Temizlikten<br>
+              daha fazlası.<br>
+              <span class="text-[#7ED4AD]">İçiniz rahat.</span>
+            </h1>
+            <p class="text-[15px] sm:text-[17.5px] text-white/85 max-w-xl leading-[1.7] mb-7 sm:mb-8">
+              Yaşam alanınıza gösterdiğiniz özeni biz de gösteriyoruz. Her detay düşünülmüş, her köşe kontrol edilmiş; size sadece ferahlığın tadını çıkarmak kalmış.
+            </p>
+            <div class="flex flex-wrap items-center gap-3.5">
+              <a href="#fiyat-hesapla" onclick="focusCalculator()" class="inline-flex items-center gap-2.5 bg-pine hover:bg-pineDeep text-white font-semibold text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full shadow-lg transition">
+                <span>Fiyat Hesapla &amp; Teklif Al</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+              </a>
+              <a href="#hizmetler" class="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 text-white font-medium text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full transition">
+                <span>Hizmetleri keşfet</span>
+                <i class="fa-solid fa-arrow-down text-[11px]"></i>
+              </a>
+            </div>
+          </div>
 
-        <h1 class="font-serif text-[2.5rem] sm:text-5xl xl:text-[4.35rem] leading-[1.04] tracking-tightest text-white mb-6">
-          Temizlikten<br>
-          daha fazlası.<br>
-          <span class="text-[#7ED4AD]">İçiniz rahat.</span>
-        </h1>
+          <!-- Banner 2: Eşyalı & Düzenli Ev Temizliği -->
+          <div class="hero-copy-slide hidden" data-copy="1">
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11.5px] font-semibold uppercase tracking-[.12em] text-white/95 mb-5">
+              Düzenli &amp; Günlük Ev Temizliği • %15’e Varan İndirim
+            </div>
+            <h2 class="font-serif text-[2.45rem] sm:text-5xl xl:text-[4.2rem] leading-[1.04] tracking-tightest text-white mb-5">
+              Eşyalı Evlerde<br>
+              <span class="text-[#7ED4AD]">Eksiksiz Hijyen.</span>
+            </h2>
+            <p class="text-[15px] sm:text-[17.5px] text-white/85 max-w-xl leading-[1.7] mb-7 sm:mb-8">
+              Mutfak tezgâhından banyo derzlerine, koltuk ve halı süpürmeden iç camlara kadar tüm yaşam alanlarınızı sağlığa dost ürünlerle titizlikle temizliyoruz.
+            </p>
+            <div class="flex flex-wrap items-center gap-3.5">
+              <button type="button" onclick="presetService('0', 0.15)" class="inline-flex items-center gap-2.5 bg-pine hover:bg-pineDeep text-white font-semibold text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full shadow-lg transition cursor-pointer">
+                <span>Ev Temizliği Hesapla</span>
+                <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+              <a href="#kontrol" class="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 text-white font-medium text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full transition">
+                <span>49 Maddelik Kontrolü Gör</span>
+                <i class="fa-solid fa-arrow-down text-[11px]"></i>
+              </a>
+            </div>
+          </div>
 
-        <p class="text-[15.5px] sm:text-[18px] text-white/85 max-w-xl leading-[1.7] mb-8 sm:mb-9">
-          Yaşam alanınıza gösterdiğiniz özeni biz de gösteriyoruz. Her detay düşünülmüş, her köşe kontrol edilmiş, geriye sadece ferahlık kalmış.
-        </p>
+          <!-- Banner 3: İnşaat & Tadilat Sonrası -->
+          <div class="hero-copy-slide hidden" data-copy="2">
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11.5px] font-semibold uppercase tracking-[.12em] text-white/95 mb-5">
+               Yeni Daireler • İnce Temizlik
+            </div>
+            <h2 class="font-serif text-[2.45rem] sm:text-5xl xl:text-[4.2rem] leading-[1.04] tracking-tightest text-white mb-5">
+              İnşaat Sonrası<br>
+              <span class="text-[#7ED4AD]">Çiziksiz Teslimat.</span>
+            </h2>
+            <p class="text-[15px] sm:text-[17.5px] text-white/85 max-w-xl leading-[1.7] mb-7 sm:mb-8">
+              Yeni veya tadilattan çıkmış dairelerde parke ve camları çizmeden boya, harç, silikon ve ince inşaat tozlarını profesyonel ekipmanlarımızla arındırıyoruz.
+            </p>
+            <div class="flex flex-wrap items-center gap-3.5">
+              <button type="button" onclick="presetService('construction', 0)" class="inline-flex items-center gap-2.5 bg-pine hover:bg-pineDeep text-white font-semibold text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full shadow-lg transition cursor-pointer">
+                <span>İnşaat Sonrası Hesapla</span>
+                <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+              <a href="https://wa.me/905398500753?text=Merhaba%2C%20in%C5%9Faat%20sonras%C4%B1%20temizlik%20i%C3%A7in%20foto%C4%9Fraf%20atmak%20istiyorum." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 text-white font-medium text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full transition">
+                <i class="fa-brands fa-whatsapp text-sm"></i>
+                <span>Fotoğrafla Fiyat Al</span>
+              </a>
+            </div>
+          </div>
 
-        <!-- Çift Eylem Butonları -->
-        <div class="flex flex-wrap items-center gap-3.5 mb-9 sm:mb-10">
-          <a href="#fiyat-hesapla" onclick="focusCalculator()" class="inline-flex items-center gap-2.5 bg-pine hover:bg-pineDeep text-white font-semibold text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full shadow-lg transition">
-            <span>Fiyat Hesapla &amp; Teklif Al</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
-          </a>
-          <a href="#hizmetler" class="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 text-white font-medium text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full transition">
-            <span>Hizmetleri keşfet</span>
-            <i class="fa-solid fa-arrow-down text-[11px]"></i>
-          </a>
+          <!-- Banner 4: Boş Ev & Taşınma Öncesi -->
+          <div class="hero-copy-slide hidden" data-copy="3">
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11.5px] font-semibold uppercase tracking-[.12em] text-white/95 mb-5">
+              Taşınma Öncesi • Anahtar Teslim Hijyen
+            </div>
+            <h2 class="font-serif text-[2.45rem] sm:text-5xl xl:text-[4.2rem] leading-[1.04] tracking-tightest text-white mb-5">
+              Boş Eviniz<br>
+              <span class="text-[#7ED4AD]">Taşınmaya Hazır.</span>
+            </h2>
+            <p class="text-[15px] sm:text-[17.5px] text-white/85 max-w-xl leading-[1.7] mb-7 sm:mb-8">
+              Eşyalarınız gelmeden önce tüm dolap içlerini, cam balkonları, petek aralarını ve zeminleri derinlemesine temizleyip yeni yuvanızı tertemiz teslim ediyoruz.
+            </p>
+            <div class="flex flex-wrap items-center gap-3.5">
+              <button type="button" onclick="presetService('800', 0)" class="inline-flex items-center gap-2.5 bg-pine hover:bg-pineDeep text-white font-semibold text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full shadow-lg transition cursor-pointer">
+                <span>Boş Ev Hesapla</span>
+                <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+              <a href="#hizmetler" class="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 text-white font-medium text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full transition">
+                <span>Detayları İncele</span>
+                <i class="fa-solid fa-arrow-down text-[11px]"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Banner 5: Ofis & İşyeri Temizliği -->
+          <div class="hero-copy-slide hidden" data-copy="4">
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11.5px] font-semibold uppercase tracking-[.12em] text-white/95 mb-5">
+              Mesai Saatlerine Uygun
+            </div>
+            <h2 class="font-serif text-[2.45rem] sm:text-5xl xl:text-[4.2rem] leading-[1.04] tracking-tightest text-white mb-5">
+              Ofis &amp; İşyerlerinde<br>
+              <span class="text-[#7ED4AD]">Ferah Çalışma Ortamı.</span>
+            </h2>
+            <p class="text-[15px] sm:text-[17.5px] text-white/85 max-w-xl leading-[1.7] mb-7 sm:mb-8">
+              Çalışma saatlerinizi aksatmadan masa, toplantı salonu, mutfak ve ortak kullanım alanlarınızı kurumsal hijyen standartlarında düzenli olarak temizliyoruz.
+            </p>
+            <div class="flex flex-wrap items-center gap-3.5">
+              <button type="button" onclick="presetService('300', 0.10)" class="inline-flex items-center gap-2.5 bg-pine hover:bg-pineDeep text-white font-semibold text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full shadow-lg transition cursor-pointer">
+                <span>Ofis Teklifi Hesapla</span>
+                <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+              <a href="#iletisim" class="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 text-white font-medium text-[13.5px] sm:text-[14px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-full transition">
+                <span>Kurumsal İletişim</span>
+                <i class="fa-solid fa-arrow-down text-[11px]"></i>
+              </a>
+            </div>
+          </div>
         </div>
 
         <!-- Güven Maddeleri -->
-        <div class="flex flex-wrap items-center gap-x-6 gap-y-2.5 text-[12.5px] sm:text-[13px] font-medium text-white/85 pb-7 border-b border-white/15">
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-2.5 text-[12.5px] sm:text-[13px] font-medium text-white/85 pt-8 pb-6 border-b border-white/15">
           <span class="flex items-center gap-2"><i class="fa-solid fa-check text-[#7ED4AD] text-[11px]"></i>Şeffaf fiyatlandırma</span>
           <span class="flex items-center gap-2"><i class="fa-solid fa-check text-[#7ED4AD] text-[11px]"></i>Deneyimli personel</span>
           <span class="flex items-center gap-2"><i class="fa-solid fa-check text-[#7ED4AD] text-[11px]"></i>Ön ödeme yok</span>
           <span class="flex items-center gap-2"><i class="fa-solid fa-check text-[#7ED4AD] text-[11px]"></i>24 saat telafi garantisi</span>
         </div>
+      </div>
 
-        <!-- Alt İstatistik & Canlı Bilgi Şeridi -->
-        <div class="grid grid-cols-3 gap-4 sm:gap-8 pt-6 max-w-lg">
+      <!-- Alt Kontrol Barı: Slayt Noktaları (Sol) & İstatistikler (Sağ) -->
+      <div class="pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <!-- 5'li Slayt Göstergesi & Oklar -->
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2" role="tablist" aria-label="Hero Banner Slaytları">
+            <button type="button" onclick="goToHeroSlide(0)" class="hero-dot active cursor-pointer" aria-label="1. Banner: Genel Hizmet"></button>
+            <button type="button" onclick="goToHeroSlide(1)" class="hero-dot cursor-pointer" aria-label="2. Banner: Ev Temizliği"></button>
+            <button type="button" onclick="goToHeroSlide(2)" class="hero-dot cursor-pointer" aria-label="3. Banner: İnşaat Sonrası"></button>
+            <button type="button" onclick="goToHeroSlide(3)" class="hero-dot cursor-pointer" aria-label="4. Banner: Boş Ev Temizliği"></button>
+            <button type="button" onclick="goToHeroSlide(4)" class="hero-dot cursor-pointer" aria-label="5. Banner: Ofis Temizliği"></button>
+          </div>
+          <span id="heroSlideCounter" class="text-[11.5px] font-semibold tracking-widest text-white/65 num-label ml-2">01 / 05</span>
+          <div class="flex items-center gap-1.5 ml-2">
+            <button type="button" onclick="prevHeroSlide()" class="w-8 h-8 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-[11px] transition cursor-pointer" aria-label="Önceki Banner">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button type="button" onclick="nextHeroSlide()" class="w-8 h-8 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-[11px] transition cursor-pointer" aria-label="Sonraki Banner">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3'lü Güven İstatistiği -->
+        <div class="grid grid-cols-3 gap-6 sm:gap-10 text-white">
           <div>
-            <div class="font-serif text-2xl sm:text-3xl text-white">11+</div>
-            <div class="text-[11px] sm:text-[11.5px] text-white/70 mt-0.5 font-medium">yıl yerel tecrübe</div>
+            <div class="font-serif text-xl sm:text-2xl">11+</div>
+            <div class="text-[10.5px] sm:text-[11px] text-white/65 font-medium">yıl yerel tecrübe</div>
           </div>
           <div>
-            <div class="font-serif text-2xl sm:text-3xl text-white">3.400+</div>
-            <div class="text-[11px] sm:text-[11.5px] text-white/70 mt-0.5 font-medium">tamamlanan ev &amp; ofis</div>
+            <div class="font-serif text-xl sm:text-2xl">3.400+</div>
+            <div class="text-[10.5px] sm:text-[11px] text-white/65 font-medium">tamamlanan ev &amp; ofis</div>
           </div>
           <div>
-            <div class="font-serif text-2xl sm:text-3xl text-[#7ED4AD]">4.9 / 5</div>
-            <div class="text-[11px] sm:text-[11.5px] text-white/70 mt-0.5 font-medium">müşteri memnuniyeti</div>
+            <div class="font-serif text-xl sm:text-2xl text-[#7ED4AD]">4.9 / 5</div>
+            <div class="text-[10.5px] sm:text-[11px] text-white/65 font-medium">müşteri memnuniyeti</div>
           </div>
         </div>
       </div>
@@ -518,7 +691,7 @@
             <button type="button" onclick="presetService('800', 0)" class="link-underline pb-1 text-[13px] font-semibold text-ink inline-flex items-center gap-2 w-fit cursor-pointer">
               Boş ev hesapla <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </button>
-            <button type="button" onclick="presetService('1200', 0)" class="text-[12px] font-medium text-pine hover:underline cursor-pointer">
+            <button type="button" onclick="presetService('construction', 0)" class="text-[12px] font-medium text-pine hover:underline cursor-pointer">
               İnşaat sonrası seç
             </button>
           </div>
@@ -527,7 +700,7 @@
         <article class="bg-paper p-8 flex flex-col">
           <div class="w-10 h-10 rounded-full border border-ink flex items-center justify-center text-pine mb-6"><i class="fa-solid fa-building text-sm"></i></div>
           <h3 class="font-serif text-xl text-ink mb-3">Ofis &amp; İşyeri Temizliği</h3>
-          <p class="text-[13.5px] text-ink/60 leading-[1.8] mb-8 flex-1">Mesai saatlerinize uygun, faturalı ve kurumsal sözleşmeli işyeri hijyeni; çalışanlarınız için ferah bir ortam.</p>
+          <p class="text-[13.5px] text-ink/60 leading-[1.8] mb-8 flex-1">Mesai saatlerinize uygun, kurumsal sözleşmeli işyeri hijyeni; çalışanlarınız için ferah bir ortam.</p>
           <button type="button" onclick="presetService('300', 0.10)" class="link-underline pb-1 text-[13px] font-semibold text-ink inline-flex items-center gap-2 w-fit cursor-pointer">
             Ofis teklifi hesapla <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </button>
@@ -543,7 +716,7 @@
               <h3 class="font-serif text-2xl sm:text-3xl text-ink tracking-tightest">Fiyat Hesapla</h3>
             </div>
             <p class="text-[13px] text-ink/60 max-w-md">
-              Seçeneklerinizi belirleyin, Batman mahallenize özel tahmini tutarınızı sürpriz ek ücret olmadan anında görün.
+              Seçeneklerinizi belirleyin, tahmini tutarınızı anında görün.
             </p>
           </div>
 
@@ -557,7 +730,7 @@
                   <select id="serviceType" onchange="calculatePrice()" class="w-full rounded-xl border hairline bg-paper px-4 py-3 pr-10 text-[13.5px] font-medium text-ink focus:outline-none focus:border-pine transition cursor-pointer">
                     <option value="0" data-name="Standart Ev Temizliği">Standart Ev Temizliği</option>
                     <option value="800" data-name="Boş Ev / Taşınma Öncesi">Boş Ev / Taşınma Öncesi (+800 ₺)</option>
-                    <option value="1200" data-name="İnşaat &amp; Tadilat Sonrası">İnşaat &amp; Tadilat Sonrası (+1.200 ₺)</option>
+                    <option value="construction" data-name="İnşaat &amp; Tadilat Sonrası">İnşaat &amp; Tadilat Sonrası</option>
                     <option value="300" data-name="Ofis &amp; İş Yeri Temizliği">Ofis &amp; İş Yeri Temizliği (+300 ₺)</option>
                   </select>
                 </div>
@@ -567,9 +740,9 @@
                   <label class="block text-[11px] font-semibold text-ink/45 uppercase tracking-[.12em] mb-1.5">2 — Alan Büyüklüğü</label>
                   <div class="grid grid-cols-4 gap-2" id="sizeButtons">
                     <button type="button" onclick="selectSize(1200, '1+1', this)" class="size-btn py-2.5 rounded-xl border border-ink bg-ink text-white font-semibold text-[13px]">1+1</button>
-                    <button type="button" onclick="selectSize(1600, '2+1', this)" class="size-btn py-2.5 rounded-xl border hairline bg-paper hover:border-pine font-medium text-[13px] text-ink/75">2+1</button>
-                    <button type="button" onclick="selectSize(2000, '3+1', this)" class="size-btn py-2.5 rounded-xl border hairline bg-paper hover:border-pine font-medium text-[13px] text-ink/75">3+1</button>
-                    <button type="button" onclick="selectSize(2400, '4+1', this)" class="size-btn py-2.5 rounded-xl border hairline bg-paper hover:border-pine font-medium text-[13px] text-ink/75">4+1</button>
+                    <button type="button" onclick="selectSize(2500, '2+1', this)" class="size-btn py-2.5 rounded-xl border hairline bg-paper hover:border-pine font-medium text-[13px] text-ink/75">2+1</button>
+                    <button type="button" onclick="selectSize(3000, '3+1', this)" class="size-btn py-2.5 rounded-xl border hairline bg-paper hover:border-pine font-medium text-[13px] text-ink/75">3+1</button>
+                    <button type="button" onclick="selectSize(4000, '4+1', this)" class="size-btn py-2.5 rounded-xl border hairline bg-paper hover:border-pine font-medium text-[13px] text-ink/75">4+1</button>
                   </div>
                 </div>
               </div>
@@ -700,7 +873,7 @@
                     </span>
                     <div>
                       <div class="text-[12.5px] font-semibold text-ink">Eviniz inşaat / tadilat sonrası mı?</div>
-                      <div class="text-[11.5px] text-ink/60">WhatsApp’tan 2 fotoğraf atın, 5 dk’da net fiyat verelim.</div>
+                      <div class="text-[11.5px] text-ink/60">WhatsApp’tan 3-4 fotoğraf atın, 5 dk’da net fiyat verelim.</div>
                     </div>
                   </div>
                   <i class="fa-solid fa-arrow-right text-[11px] text-pine group-hover:translate-x-0.5 transition"></i>
@@ -717,7 +890,7 @@
       <div id="kontrol" class="pt-4">
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-7 mb-9">
           <div class="max-w-xl">
-            <div class="text-[11px] font-semibold uppercase tracking-[.14em] text-pine mb-3">49 Maddelik Kontrol</div>
+            <div class="text-[11px] font-semibold uppercase tracking-[.14em] text-pine mb-3">Nerede Neye Dikkat Ediyoruz?</div>
             <h3 class="font-serif text-3xl sm:text-4xl text-ink tracking-tightest">Bir köşe bile <em class="italic text-pine">gözden kaçmasın.</em></h3>
           </div>
           <p class="text-[14px] text-ink/65 max-w-md leading-relaxed">
@@ -778,7 +951,7 @@
     <div class="max-w-7xl mx-auto px-5 sm:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
         <div class="max-w-xl">
-          <div class="text-[11px] font-semibold uppercase tracking-[.14em] text-pine mb-3">Blog &amp; Batman Rehberi</div>
+          <div class="text-[11px] font-semibold uppercase tracking-[.14em] text-pine mb-3">Blog</div>
           <h2 class="font-serif text-3xl sm:text-4xl text-ink tracking-tightest">Karar vermenizi kolaylaştıran pratik bilgiler</h2>
         </div>
         <span class="text-[12.5px] text-ink/55">Okumak istediğiniz kartın üzerine tıklayın</span>
@@ -789,7 +962,6 @@
           <div>
             <div class="flex items-center justify-between text-[11px] font-semibold text-pine uppercase tracking-wider mb-4">
               <span>Fiyat Rehberi</span>
-              <span class="text-ink/40 font-normal">2 dk okuma</span>
             </div>
             <h3 class="font-serif text-xl text-ink mb-3 group-hover:text-pine transition">Batman’da 2+1 ve 3+1 Ev Temizliği Fiyatları Neye Göre Değişir?</h3>
             <p class="text-[13px] text-ink/60 leading-relaxed mb-6">Evin eşyalı veya boş olması, cam balkon sayısı ve ekstra dolap içi taleplerinin bütçeye etkisini şeffafça inceledik.</p>
@@ -801,9 +973,8 @@
           <div>
             <div class="flex items-center justify-between text-[11px] font-semibold text-pine uppercase tracking-wider mb-4">
               <span>Tadilat &amp; Yeni Daire</span>
-              <span class="text-ink/40 font-normal">3 dk okuma</span>
             </div>
-            <h3 class="font-serif text-xl text-ink mb-3 group-hover:text-pine transition">Gültepe ve Tilmerç’te Yeni Daire Alanlar İçin: İnşaat Sonrası Temizlik</h3>
+            <h3 class="font-serif text-xl text-ink mb-3 group-hover:text-pine transition">Yeni Daire Alanlar İçin: İnşaat Sonrası Temizlik</h3>
             <p class="text-[13px] text-ink/60 leading-relaxed mb-6">Parke ve camları çizmeden boya, harç ve silikon kalıntılarından kurtulmanın doğru ekipman ve ürün adımları.</p>
           </div>
           <span class="text-[13px] font-semibold text-ink inline-flex items-center gap-2">Yazıyı oku <i class="fa-solid fa-arrow-right text-[10px] text-pine"></i></span>
@@ -813,7 +984,6 @@
           <div>
             <div class="flex items-center justify-between text-[11px] font-semibold text-pine uppercase tracking-wider mb-4">
               <span>Süreç &amp; Güven</span>
-              <span class="text-ink/40 font-normal">2 dk okuma</span>
             </div>
             <h3 class="font-serif text-xl text-ink mb-3 group-hover:text-pine transition">Temizliğe Kaç Personel Gelir? Evde Durmam Gerekir mi?</h3>
             <p class="text-[13px] text-ink/60 leading-relaxed mb-6">Oda sayısına göre ekip planlaması, anahtar teslimi süreci ve temizlik malzemesi temini hakkında merak edilenler.</p>
@@ -829,7 +999,7 @@
           <div class="lg:col-span-5 lg:sticky lg:top-28">
             <div class="text-[11px] font-semibold uppercase tracking-[.14em] text-pine mb-3">Merak Ettikleriniz</div>
             <h3 class="font-serif text-3xl sm:text-4xl text-ink tracking-tightest mb-4">
-              İçinizde soru<br><em class="italic text-pine">işareti kalmasın.</em>
+              Aklınızda soru<br><em class="italic text-pine">işareti kalmasın.</em>
             </h3>
             <p class="text-[14.5px] text-ink/65 leading-relaxed mb-6">
               Başka bir sorunuz varsa bize doğrudan WhatsApp veya telefon hattımızdan ulaşabilirsiniz.
@@ -859,7 +1029,7 @@
                 <span class="text-[15px] font-semibold text-ink">Fiyatı nasıl öğrenebilirim?</span>
                 <span aria-hidden="true" class="w-7 h-7 rounded-full border hairline bg-white flex items-center justify-center text-pine font-semibold text-base shrink-0 transition-transform duration-200 group-open:rotate-45">+</span>
               </summary>
-              <p class="text-[13.5px] text-ink/65 leading-relaxed mt-3.5 pr-6">Sayfamızın üst kısmındaki Fiyat Hesaplayıcı üzerinden daire tipinizi ve mahallenizi seçerek anında şeffaf tahmini fiyat alabilirsiniz. İnşaat sonrası veya özel durumlar için WhatsApp’tan 2 fotoğraf paylaşmanız yeterlidir.</p>
+              <p class="text-[13.5px] text-ink/65 leading-relaxed mt-3.5 pr-6">Sayfamızın üst kısmındaki Fiyat Hesaplayıcı üzerinden daire tipinizi ve mahallenizi seçerek anında şeffaf tahmini fiyat alabilirsiniz. İnşaat sonrası veya özel durumlar için WhatsApp’tan 3-4 fotoğraf paylaşmanız yeterlidir.</p>
             </details>
 
             <details class="group bg-paper rounded-2xl border hairline px-6 py-4 transition hover:border-pine/40">
@@ -922,11 +1092,11 @@
                 <div class="text-[12px] text-ink/55 mt-1">Haftanın 7 günü 08:00 – 20:00</div>
               </a>
 
-              <a href="mailto:info@batmangunceltemizlik.com" class="bg-white rounded-2xl border hairline p-5 hover:border-pine transition block">
+              <a href="mailto:gunceltemizlikbatman@gmail.com" class="bg-white rounded-2xl border hairline p-5 hover:border-pine transition block">
                 <div class="text-[11px] font-semibold uppercase tracking-wider text-pine mb-2 flex items-center gap-2">
                   <i class="fa-regular fa-envelope"></i> E-Posta
                 </div>
-                <div class="font-medium text-[14px] text-ink break-all">info@batmangunceltemizlik.com</div>
+                <div class="font-medium text-[14px] text-ink break-all">gunceltemizlikbatman@gmail.com</div>
                 <div class="text-[12px] text-ink/55 mt-1">Kurumsal teklif ve fatura</div>
               </a>
             </div>
@@ -960,20 +1130,23 @@
               <p class="text-[13.5px] text-ink/60 mb-6">Bilgilerinizi bırakın, ekibimiz aynı gün içinde sizi arasın.</p>
 
               <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                <!-- Spam/Bot Koruması (Görünmez Alan) -->
+                <input id="cWebsite" name="website" type="text" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+
                 <div class="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label for="cName" class="block text-[11px] font-semibold text-ink/50 uppercase tracking-wider mb-1.5">Adınız Soyadınız</label>
-                    <input id="cName" type="text" required placeholder="Örn. Ahmet Yılmaz" class="w-full rounded-xl border hairline bg-paper px-4 py-3 text-[13.5px] text-ink focus:outline-none focus:border-pine transition">
+                    <input id="cName" name="name" type="text" required placeholder="Örn. Ahmet Yılmaz" class="w-full rounded-xl border hairline bg-paper px-4 py-3 text-[13.5px] text-ink focus:outline-none focus:border-pine transition">
                   </div>
                   <div>
                     <label for="cPhone" class="block text-[11px] font-semibold text-ink/50 uppercase tracking-wider mb-1.5">Telefon Numaranız</label>
-                    <input id="cPhone" type="tel" required placeholder="05XX XXX XX XX" class="w-full rounded-xl border hairline bg-paper px-4 py-3 text-[13.5px] text-ink focus:outline-none focus:border-pine transition">
+                    <input id="cPhone" name="phone" type="tel" required placeholder="05XX XXX XX XX" class="w-full rounded-xl border hairline bg-paper px-4 py-3 text-[13.5px] text-ink focus:outline-none focus:border-pine transition">
                   </div>
                 </div>
 
                 <div>
                   <label for="cService" class="block text-[11px] font-semibold text-ink/50 uppercase tracking-wider mb-1.5">İlgilendiğiniz Hizmet</label>
-                  <select id="cService" class="w-full rounded-xl border hairline bg-paper px-4 py-3 pr-10 text-[13.5px] text-ink focus:outline-none focus:border-pine transition cursor-pointer">
+                  <select id="cService" name="service" class="w-full rounded-xl border hairline bg-paper px-4 py-3 pr-10 text-[13.5px] text-ink focus:outline-none focus:border-pine transition cursor-pointer">
                     <option value="Ev Temizliği">Ev Temizliği</option>
                     <option value="Boş Ev / Taşınma Öncesi">Boş Ev / Taşınma Öncesi</option>
                     <option value="İnşaat & Tadilat Sonrası">İnşaat &amp; Tadilat Sonrası</option>
@@ -984,7 +1157,7 @@
 
                 <div>
                   <label for="cMessage" class="block text-[11px] font-semibold text-ink/50 uppercase tracking-wider mb-1.5">Mesajınız / Adres Bilgisi</label>
-                  <textarea id="cMessage" rows="3" required placeholder="Evinizin oda sayısı, mahalleniz veya istediğiniz tarih hakkında kısaca bilgi verin..." class="w-full rounded-xl border hairline bg-paper px-4 py-3 text-[13.5px] text-ink focus:outline-none focus:border-pine transition resize-none"></textarea>
+                  <textarea id="cMessage" name="message" rows="3" required placeholder="Evinizin oda sayısı, mahalleniz veya istediğiniz tarih hakkında kısaca bilgi verin..." class="w-full rounded-xl border hairline bg-paper px-4 py-3 text-[13.5px] text-ink focus:outline-none focus:border-pine transition resize-none"></textarea>
                 </div>
 
                 <div class="flex items-start gap-2.5 text-[12px] text-ink/65">
@@ -994,9 +1167,9 @@
                   </label>
                 </div>
 
-                <button type="submit" class="btn-primary w-full py-3.5 rounded-xl font-semibold text-[13.5px] flex items-center justify-center gap-2 cursor-pointer">
-                  <span>Mesajı Gönder</span>
-                  <i class="fa-solid fa-paper-plane text-xs"></i>
+                <button id="contactSubmitBtn" type="submit" class="btn-primary w-full py-3.5 rounded-xl font-semibold text-[13.5px] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
+                  <span id="contactSubmitText">Mesajı Gönder</span>
+                  <i id="contactSubmitIcon" class="fa-solid fa-paper-plane text-xs"></i>
                 </button>
               </form>
 
@@ -1005,8 +1178,8 @@
                 <div class="flex items-start gap-3">
                   <i class="fa-solid fa-circle-check text-pine text-base mt-0.5"></i>
                   <div class="flex-1">
-                    <div class="font-semibold text-ink mb-1">Talebiniz hazırlandı!</div>
-                    <p class="text-ink/70 text-[12.5px] mb-3">Statik önizleme modundasınız; dilerseniz bilgilerinizi doğrudan WhatsApp hattımıza tek tıkla aktarabilirsiniz.</p>
+                    <div id="formSuccessTitle" class="font-semibold text-ink mb-1">Mesajınız başarıyla iletildi!</div>
+                    <p id="formSuccessText" class="text-ink/70 text-[12.5px] mb-3">Talebiniz ekibimize ulaştı, aynı gün içinde sizi arayacağız. İsterseniz WhatsApp’tan da hemen yazabilirsiniz.</p>
                     <a id="formWhatsappDirect" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-pine hover:bg-pineDeep text-white text-[12px] font-semibold px-3.5 py-2 rounded-lg transition">
                       <i class="fa-brands fa-whatsapp"></i> WhatsApp’tan Hemen İlet
                     </a>
@@ -1158,17 +1331,15 @@
     <div class="max-w-7xl mx-auto px-5 sm:px-8">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-8 border-b border-white/10">
         <div class="flex items-center gap-3.5">
-          <div class="w-11 h-11 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0 shadow-sm">
-            <svg class="w-full h-full" viewBox="0 0 120 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M27 36L35 28H45L47 33H38L34 39L38 45L45 64L28 69L24 50L27 36Z" fill="#1F3A8A"/>
-              <path d="M16 29L24 31M14 35L23 35M17 41L24 39" stroke="#1F3A8A" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M40 20L66 13L68 19L42 26L40 20Z" fill="#1F3A8A"/>
-              <path d="M52 22L58 58" stroke="#1F3A8A" stroke-width="4.5" stroke-linecap="round"/>
-              <path d="M68 25L88 27L83 49L65 47L68 25Z" fill="#1F3A8A"/>
-              <path d="M74 49L72 58" stroke="#1F3A8A" stroke-width="4" stroke-linecap="round"/>
-              <path d="M28 88C16 74 22 57 44 52C64 47 84 52 94 58C79 55 58 53 41 59C26 65 24 77 32 88H28Z" fill="#7CB342"/>
-            </svg>
-          </div>
+          <svg class="w-12 h-12 shrink-0" viewBox="0 0 120 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M27 36L35 28H45L47 33H38L34 39L38 45L45 64L28 69L24 50L27 36Z" fill="#FFFFFF"/>
+            <path d="M16 29L24 31M14 35L23 35M17 41L24 39" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M40 20L66 13L68 19L42 26L40 20Z" fill="#FFFFFF"/>
+            <path d="M52 22L58 58" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M68 25L88 27L83 49L65 47L68 25Z" fill="#FFFFFF"/>
+            <path d="M74 49L72 58" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+            <path d="M28 88C16 74 22 57 44 52C64 47 84 52 94 58C79 55 58 53 41 59C26 65 24 77 32 88H28Z" fill="#7ED4AD"/>
+          </svg>
           <div>
             <span class="font-serif text-white text-[17px] block leading-tight">Güncel Temizlik</span>
             <span class="text-[11.5px] text-white/50">Cumhuriyet Mah. Atatürk Blv. Cihan Plaza 76, Kat: 3 No: 20, Merkez / BATMAN</span>
@@ -1188,8 +1359,11 @@
           <button type="button" onclick="openKvkkModal()" class="text-white/70 hover:text-white underline text-left cursor-pointer transition">KVKK Aydınlatma Metni ve Çerez Politikası</button>
           <span>© 2026 Güncel Temizlik. Tüm hakları saklıdır.</span>
         </div>
-        <div>
-          <a href="https://kirkyama.uk/tr" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-[#7ED4AD] font-semibold underline underline-offset-4 transition">kırkyama</a> özenle sunar.
+        <div class="inline-flex items-center gap-2 text-[12px] text-white/50">
+          <a href="https://kirkyama.uk/tr" target="_blank" rel="noopener noreferrer" class="inline-flex items-center opacity-80 hover:opacity-100 transition-opacity duration-200" aria-label="Kırkyama">
+            <img src="data:image/png;base64,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" alt="kırkyama" class="h-[22px] w-auto block -mt-0.5">
+          </a>
+          <span>özenle sunar.</span>
         </div>
       </div>
     </div>
@@ -1233,7 +1407,7 @@
             <strong>Güncel Temizlik (Batman)</strong><br>
             Adres: Cumhuriyet Mah. Atatürk Blv. Cihan Plaza 76, Kat: 3 No: 20, Merkez / BATMAN<br>
             Telefon: <a href="tel:+905398500753" class="text-pine font-semibold">0539 850 07 53</a><br>
-            E-posta: <a href="mailto:info@batmangunceltemizlik.com" class="text-pine font-semibold">info@batmangunceltemizlik.com</a>
+            E-posta: <a href="mailto:gunceltemizlikbatman@gmail.com" class="text-pine font-semibold">gunceltemizlikbatman@gmail.com</a>
           </p>
         </div>
 
@@ -1297,7 +1471,7 @@
         <div>
           <h4 class="font-semibold text-ink text-[15px] mb-1.5">8. Başvuru Yöntemi</h4>
           <p>
-            Taleplerinizi kimliğinizi ve talebinizi açıkça belirterek <strong>Cumhuriyet Mah. Atatürk Blv. Cihan Plaza 76, Kat: 3 No: 20, Merkez / BATMAN</strong> adresine yazılı olarak veya <a href="mailto:info@batmangunceltemizlik.com" class="text-pine font-semibold">info@batmangunceltemizlik.com</a> e-posta adresine iletebilirsiniz. Başvurunuz en geç 30 gün içinde ücretsiz olarak sonuçlandırılır.
+            Taleplerinizi kimliğinizi ve talebinizi açıkça belirterek <strong>Cumhuriyet Mah. Atatürk Blv. Cihan Plaza 76, Kat: 3 No: 20, Merkez / BATMAN</strong> adresine yazılı olarak veya <a href="mailto:gunceltemizlikbatman@gmail.com" class="text-pine font-semibold">gunceltemizlikbatman@gmail.com</a> e-posta adresine iletebilirsiniz. Başvurunuz en geç 30 gün içinde ücretsiz olarak sonuçlandırılır.
           </p>
         </div>
 
@@ -1352,6 +1526,8 @@
 
   <script>
     const PHONE_WA = "905398500753";
+    // Google Apps Script Web Uygulaması URL'nizi aşağıya tırnak içine yapıştırın:
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwow9U1mWlQYhcIWdTKPZfyPV3Uak1fAaKJnxUsgNgHAGjdJvSKGY0mQ1ak8xKWFm2N/exec";
     let currentBasePrice = 1200;
     let currentSizeLabel = '1+1';
     let currentDiscount = 0;
@@ -1577,17 +1753,25 @@
       setTimeout(() => card.classList.remove('calc-highlight'), 1400);
     }
 
-    function calculateEstimateMeta(serviceExtra, sizeLabel, extraCount) {
+    const CONSTRUCTION_PRICES = {
+      '1+1': 5000,
+      '2+1': 7000,
+      '3+1': 8000,
+      '4+1': 10000
+    };
+
+    function calculateEstimateMeta(serviceVal, serviceExtra, sizeLabel, extraCount) {
       let hours = 3.5;
       if (sizeLabel === '2+1') hours = 4.5;
       else if (sizeLabel === '3+1') hours = 5.5;
       else if (sizeLabel === '4+1') hours = 7;
 
-      if (serviceExtra >= 800) hours += 1.5;
+      const isHeavy = serviceVal === 'construction' || serviceExtra >= 800;
+      if (isHeavy) hours += 1.5;
       else if (serviceExtra === 300) hours += 0.5;
       hours += extraCount * 0.5;
 
-      const crew = (sizeLabel === '3+1' && serviceExtra >= 800) || sizeLabel === '4+1' || hours >= 6.5 ? 2 : 1;
+      const crew = (sizeLabel === '3+1' && isHeavy) || sizeLabel === '4+1' || hours >= 6.5 ? 2 : 1;
       const minH = Math.floor(hours);
       const maxH = Math.ceil(hours + 0.5);
       return `~${minH}–${maxH} Saat · ${crew} Uzman Personel`;
@@ -1595,7 +1779,10 @@
 
     function calculatePrice() {
       const serviceSelect = document.getElementById('serviceType');
-      const serviceExtra = parseInt(serviceSelect.value, 10);
+      const serviceVal = serviceSelect.value;
+      const isConstruction = serviceVal === 'construction';
+      const serviceExtra = isConstruction ? 0 : parseInt(serviceVal, 10);
+      const baseAmount = isConstruction ? (CONSTRUCTION_PRICES[currentSizeLabel] || 5000) : currentBasePrice;
       const serviceName = serviceSelect.options[serviceSelect.selectedIndex].getAttribute('data-name');
       const neighborhood = document.getElementById('neighborhood').value;
       const timePref = document.getElementById('timePreference').value;
@@ -1607,7 +1794,7 @@
         selectedExtras.push(cb.getAttribute('data-label'));
       });
 
-      const subtotal = currentBasePrice + serviceExtra + extrasTotal;
+      const subtotal = baseAmount + serviceExtra + extrasTotal;
       const discountAmount = Math.round(subtotal * currentDiscount);
       const total = subtotal - discountAmount;
 
@@ -1626,7 +1813,7 @@
         badgeEl.classList.add('hidden');
       }
 
-      const estimateStr = calculateEstimateMeta(serviceExtra, currentSizeLabel, selectedExtras.length);
+      const estimateStr = calculateEstimateMeta(serviceVal, serviceExtra, currentSizeLabel, selectedExtras.length);
       document.getElementById('estimateMeta').innerHTML = `<i class="fa-regular fa-hourglass-half text-brass text-[10px]"></i><span>${estimateStr}</span>`;
 
       const extraText = selectedExtras.length > 0 ? selectedExtras.join(', ') : 'Yok';
@@ -1859,16 +2046,63 @@
       document.body.style.overflow = '';
     }
 
-    function handleContactSubmit(event) {
+    async function handleContactSubmit(event) {
       event.preventDefault();
+      const form = document.getElementById('contactForm');
       const name = document.getElementById('cName').value.trim();
       const phone = document.getElementById('cPhone').value.trim();
       const service = document.getElementById('cService').value;
       const msg = document.getElementById('cMessage').value.trim();
+      const website = document.getElementById('cWebsite') ? document.getElementById('cWebsite').value.trim() : '';
+
+      const submitBtn = document.getElementById('contactSubmitBtn');
+      const submitText = document.getElementById('contactSubmitText');
+      const submitIcon = document.getElementById('contactSubmitIcon');
+      const successBox = document.getElementById('formSuccess');
+      const successTitle = document.getElementById('formSuccessTitle');
+      const successText = document.getElementById('formSuccessText');
 
       const waMsg = `Merhaba, iletişim formundan ulaşıyorum.\n- Ad Soyad: ${name}\n- Telefon: ${phone}\n- Hizmet: ${service}\n- Not: ${msg}`;
       document.getElementById('formWhatsappDirect').href = `https://wa.me/${PHONE_WA}?text=${encodeURIComponent(waMsg)}`;
-      document.getElementById('formSuccess').classList.remove('hidden');
+
+      if (!GOOGLE_SCRIPT_URL) {
+        successTitle.innerText = 'Talebiniz hazırlandı!';
+        successText.innerText = 'Google Apps Script bağlantısı henüz tanımlanmadı; bilgilerinizi doğrudan WhatsApp hattımıza tek tıkla aktarabilirsiniz.';
+        successBox.classList.remove('hidden');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitText.innerText = 'Gönderiliyor...';
+      submitIcon.className = 'fa-solid fa-spinner fa-spin text-xs';
+
+      try {
+        const params = new URLSearchParams();
+        params.append('name', name);
+        params.append('phone', phone);
+        params.append('service', service);
+        params.append('message', msg);
+        params.append('website', website);
+
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: params
+        });
+
+        successTitle.innerText = 'Mesajınız başarıyla iletildi!';
+        successText.innerText = 'Talebiniz ekibimize ve e-posta adresimize ulaştı, aynı gün içinde sizi arayacağız. İsterseniz WhatsApp’tan da hemen yazabilirsiniz.';
+        successBox.classList.remove('hidden');
+        form.reset();
+      } catch (err) {
+        successTitle.innerText = 'Bağlantı hatası oluştu';
+        successText.innerText = 'Form gönderilirken geçici bir sorun yaşandı. Dilerseniz aşağıdaki butonla talebinizi doğrudan WhatsApp’tan iletebilirsiniz.';
+        successBox.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitText.innerText = 'Mesajı Gönder';
+        submitIcon.className = 'fa-solid fa-paper-plane text-xs';
+      }
     }
 
     document.getElementById('blogModal').addEventListener('click', function(e) {
@@ -1898,6 +2132,135 @@
 
     window.addEventListener('scroll', updateHeaderScroll, { passive: true });
     updateHeaderScroll();
+
+    // 5'li Hero Banner Slider Kontrolü
+    let currentHeroSlide = 0;
+    const totalHeroSlides = 5;
+    let heroAutoTimer = null;
+
+    function goToHeroSlide(index) {
+      currentHeroSlide = ((index % totalHeroSlides) + totalHeroSlides) % totalHeroSlides;
+
+      document.querySelectorAll('.hero-slide').forEach((el, idx) => {
+        el.classList.toggle('active', idx === currentHeroSlide);
+      });
+
+      document.querySelectorAll('.hero-copy-slide').forEach((el, idx) => {
+        el.classList.toggle('hidden', idx !== currentHeroSlide);
+      });
+
+      document.querySelectorAll('.hero-dot').forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentHeroSlide);
+      });
+
+      const counterEl = document.getElementById('heroSlideCounter');
+      if (counterEl) {
+        counterEl.innerText = `0${currentHeroSlide + 1} / 0${totalHeroSlides}`;
+      }
+
+      resetHeroTimer();
+    }
+
+    function nextHeroSlide() {
+      goToHeroSlide(currentHeroSlide + 1);
+    }
+
+    function prevHeroSlide() {
+      goToHeroSlide(currentHeroSlide - 1);
+    }
+
+    function resetHeroTimer() {
+      if (heroAutoTimer) clearInterval(heroAutoTimer);
+      heroAutoTimer = setInterval(() => {
+        goToHeroSlide(currentHeroSlide + 1);
+      }, 5500);
+    }
+
+    const heroSection = document.getElementById('anasayfa');
+    const heroContentEl = document.getElementById('heroContentSlides');
+    if (heroSection) {
+      let isDraggingHero = false;
+      let activePointerId = null;
+      let dragStartX = 0;
+      let dragCurrentX = 0;
+      let wasHeroDragged = false;
+
+      heroSection.addEventListener('mouseenter', () => {
+        if (heroAutoTimer) clearInterval(heroAutoTimer);
+      });
+      heroSection.addEventListener('mouseleave', () => {
+        if (!isDraggingHero) resetHeroTimer();
+      });
+
+      // Tarayıcının varsayılan sürükle-bırak (ghost drag) davranışını engelle
+      heroSection.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+      });
+
+      heroSection.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        if (e.target && e.target.closest('a, button, input, select, textarea')) return;
+
+        if (e.pointerType === 'mouse') e.preventDefault();
+
+        isDraggingHero = true;
+        activePointerId = e.pointerId;
+        wasHeroDragged = false;
+        dragStartX = e.clientX;
+        dragCurrentX = e.clientX;
+
+        try { heroSection.setPointerCapture(e.pointerId); } catch (_) {}
+        if (heroContentEl) heroContentEl.style.transition = 'none';
+        if (heroAutoTimer) clearInterval(heroAutoTimer);
+      });
+
+      heroSection.addEventListener('pointermove', (e) => {
+        if (!isDraggingHero || e.pointerId !== activePointerId) return;
+        dragCurrentX = e.clientX;
+        const diff = dragCurrentX - dragStartX;
+        if (Math.abs(diff) > 6) wasHeroDragged = true;
+        if (heroContentEl) {
+          const clamped = Math.max(-110, Math.min(110, diff * 0.4));
+          heroContentEl.style.transform = `translateX(${clamped}px)`;
+        }
+      });
+
+      function finishHeroPointer(e) {
+        if (!isDraggingHero || e.pointerId !== activePointerId) return;
+        isDraggingHero = false;
+        const diff = (typeof e.clientX === 'number' ? e.clientX : dragCurrentX) - dragStartX;
+        try { heroSection.releasePointerCapture(e.pointerId); } catch (_) {}
+        activePointerId = null;
+
+        if (heroContentEl) {
+          heroContentEl.style.transition = 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)';
+          heroContentEl.style.transform = 'translateX(0)';
+        }
+
+        if (Math.abs(diff) > 30) {
+          if (diff < 0) nextHeroSlide();
+          else prevHeroSlide();
+        } else {
+          resetHeroTimer();
+        }
+
+        setTimeout(() => { wasHeroDragged = false; }, 50);
+      }
+
+      heroSection.addEventListener('pointerup', finishHeroPointer);
+      heroSection.addEventListener('pointercancel', finishHeroPointer);
+
+      // Sürükleme sonrası yanlışlıkla link/buton tetiklenmesini önle
+      heroSection.addEventListener('click', (e) => {
+        if (wasHeroDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+          wasHeroDragged = false;
+        }
+      }, true);
+    }
+
+    resetHeroTimer();
 
     calculatePrice();
     switchTab('mutfak', document.querySelector('.tab-pill'));
