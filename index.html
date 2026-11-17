@@ -183,58 +183,114 @@
   .calc-highlight{ box-shadow:0 0 0 3px rgba(43,92,76,.28); }
   .no-scrollbar::-webkit-scrollbar{ display:none; }
   .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
+  /* Hero ile bütünleşen ve kaydırınca menüye dönüşen Header */
+  #siteHeader{
+    background:transparent;
+    border-bottom:1px solid transparent;
+    transition:background .3s ease, border-color .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
+  }
+  #siteHeader .header-inner{
+    height:92px;
+    transition:height .3s ease;
+  }
+  @media (min-width:640px){
+    #siteHeader .header-inner{ height:104px; }
+  }
+  #siteHeader .logo-svg{
+    width:48px; height:48px;
+    transition:width .3s ease, height .3s ease;
+  }
+  @media (min-width:640px){
+    #siteHeader .logo-svg{ width:56px; height:56px; }
+  }
+  #siteHeader .logo-primary{ fill:#FFFFFF; stroke:#FFFFFF; transition:fill .3s ease, stroke .3s ease; }
+  #siteHeader .logo-primary-fill{ fill:#FFFFFF; transition:fill .3s ease; }
+  #siteHeader .logo-primary-stroke{ stroke:#FFFFFF; transition:stroke .3s ease; }
+  #siteHeader .logo-accent{ fill:#7ED4AD; transition:fill .3s ease; }
+  #siteHeader .logo-title{ color:#FFFFFF; font-size:22px; transition:color .3s ease, font-size .3s ease; }
+  #siteHeader .logo-sub{ color:rgba(255,255,255,.82); transition:color .3s ease; }
+  #siteHeader .nav-links{ color:rgba(255,255,255,.9); transition:color .3s ease; }
+  #siteHeader .nav-links a:hover{ color:#FFFFFF; }
+  #siteHeader .nav-phone{ color:rgba(255,255,255,.92); transition:color .3s ease; }
+  #siteHeader .nav-phone i{ color:#7ED4AD; transition:color .3s ease; }
+  #siteHeader .nav-cta{ background:#2B5C4C; color:#FFFFFF; border:1px solid rgba(255,255,255,.22); box-shadow:0 8px 24px rgba(0,0,0,.22); }
+  #siteHeader .nav-cta:hover{ background:#1F4539; }
+  #siteHeader .mobile-toggle{ background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.28); color:#FFFFFF; backdrop-filter:blur(8px); }
+
+  /* Sayfa aşağı kaydırıldığında (is-scrolled) */
+  #siteHeader.is-scrolled{
+    background:rgba(245,243,238,.95);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom-color:#E4E0D6;
+    box-shadow:0 4px 20px rgba(20,32,28,.06);
+  }
+  #siteHeader.is-scrolled .header-inner{ height:72px; }
+  #siteHeader.is-scrolled .logo-svg{ width:40px; height:40px; }
+  #siteHeader.is-scrolled .logo-primary-fill{ fill:#1F3A8A; }
+  #siteHeader.is-scrolled .logo-primary-stroke{ stroke:#1F3A8A; }
+  #siteHeader.is-scrolled .logo-accent{ fill:#7CB342; }
+  #siteHeader.is-scrolled .logo-title{ color:#1F3A8A; font-size:20px; }
+  #siteHeader.is-scrolled .logo-sub{ color:#14201C; }
+  #siteHeader.is-scrolled .nav-links{ color:rgba(20,32,28,.75); }
+  #siteHeader.is-scrolled .nav-links a:hover{ color:#14201C; }
+  #siteHeader.is-scrolled .nav-phone{ color:rgba(20,32,28,.85); }
+  #siteHeader.is-scrolled .nav-phone i{ color:#2B5C4C; }
+  #siteHeader.is-scrolled .nav-cta{ background:#14201C; color:#F5F3EE; border-color:transparent; box-shadow:none; }
+  #siteHeader.is-scrolled .nav-cta:hover{ background:#2B5C4C; }
+  #siteHeader.is-scrolled .mobile-toggle{ background:#FFFFFF; border-color:#E4E0D6; color:#14201C; }
   @media (prefers-reduced-motion:reduce){ *,*::before,*::after{ transition:none!important; animation:none!important; scroll-behavior:auto!important; } }
 </style>
 </head>
 <body class="antialiased selection:bg-pine selection:text-white">
 
-  <!-- Navigasyon (Tam 5 Ana Menü Butonu) -->
-  <header class="sticky top-0 z-40 bg-paper/95 backdrop-blur border-b hairline">
-    <div class="max-w-7xl mx-auto px-5 sm:px-8 h-[76px] flex items-center justify-between gap-4">
+  <!-- Navigasyon (Hero ile bütünleşik, kaydırınca sabit menü) -->
+  <header id="siteHeader" class="fixed top-0 inset-x-0 z-40">
+    <div class="header-inner max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between gap-4">
       <!-- Marka Logosu (Gerçek Logo Tasarımından Vektörel Uyarlama) -->
-      <a href="#anasayfa" class="flex items-center gap-2.5 shrink-0" aria-label="Güncel Temizlik Ana Sayfa">
-        <svg class="w-11 h-11 shrink-0" viewBox="0 0 120 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <a href="#anasayfa" class="flex items-center gap-3 shrink-0" aria-label="Güncel Temizlik Ana Sayfa">
+        <svg class="logo-svg shrink-0" viewBox="0 0 120 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <!-- Sprey şişesi -->
-          <path d="M27 36L35 28H45L47 33H38L34 39L38 45L45 64L28 69L24 50L27 36Z" fill="#1F3A8A"/>
-          <path d="M16 29L24 31M14 35L23 35M17 41L24 39" stroke="#1F3A8A" stroke-width="2.5" stroke-linecap="round"/>
+          <path class="logo-primary-fill" d="M27 36L35 28H45L47 33H38L34 39L38 45L45 64L28 69L24 50L27 36Z"/>
+          <path class="logo-primary-stroke" d="M16 29L24 31M14 35L23 35M17 41L24 39" stroke-width="2.5" stroke-linecap="round"/>
           <!-- Çekçek -->
-          <path d="M40 20L66 13L68 19L42 26L40 20Z" fill="#1F3A8A"/>
-          <path d="M52 22L58 58" stroke="#1F3A8A" stroke-width="4.5" stroke-linecap="round"/>
+          <path class="logo-primary-fill" d="M40 20L66 13L68 19L42 26L40 20Z"/>
+          <path class="logo-primary-stroke" d="M52 22L58 58" stroke-width="4.5" stroke-linecap="round"/>
           <!-- Fırça/Süpürge -->
-          <path d="M68 25L88 27L83 49L65 47L68 25Z" fill="#1F3A8A"/>
-          <path d="M74 49L72 58" stroke="#1F3A8A" stroke-width="4" stroke-linecap="round"/>
+          <path class="logo-primary-fill" d="M68 25L88 27L83 49L65 47L68 25Z"/>
+          <path class="logo-primary-stroke" d="M74 49L72 58" stroke-width="4" stroke-linecap="round"/>
           <!-- Yeşil kavis -->
-          <path d="M28 88C16 74 22 57 44 52C64 47 84 52 94 58C79 55 58 53 41 59C26 65 24 77 32 88H28Z" fill="#7CB342"/>
+          <path class="logo-accent" d="M28 88C16 74 22 57 44 52C64 47 84 52 94 58C79 55 58 53 41 59C26 65 24 77 32 88H28Z"/>
         </svg>
         <div class="leading-none">
-          <span class="block font-sans font-extrabold text-[20px] tracking-tight text-brandBlue">Güncel</span>
-          <span class="block text-[9.5px] font-semibold tracking-[0.28em] text-ink uppercase mt-0.5">TEMİZLİK</span>
+          <span class="logo-title block font-sans font-extrabold tracking-tight">Güncel</span>
+          <span class="logo-sub block text-[9.5px] font-semibold tracking-[0.28em] uppercase mt-0.5">TEMİZLİK</span>
         </div>
       </a>
 
       <!-- Masaüstü Menü (5 Buton) -->
-      <nav class="hidden lg:flex items-center gap-8 text-[13.5px] font-medium text-ink/75" aria-label="Ana Menü">
-        <a href="#anasayfa" class="link-underline pb-1 hover:text-ink">Ana Sayfa</a>
-        <a href="#kurumsal" class="link-underline pb-1 hover:text-ink">Kurumsal</a>
-        <a href="#hizmetler" class="link-underline pb-1 hover:text-ink">Hizmetler</a>
-        <a href="#blog" class="link-underline pb-1 hover:text-ink">Blog</a>
-        <a href="#iletisim" class="link-underline pb-1 hover:text-ink">İletişim</a>
+      <nav class="nav-links hidden lg:flex items-center gap-8 text-[13.5px] font-medium" aria-label="Ana Menü">
+        <a href="#anasayfa" class="link-underline pb-1">Ana Sayfa</a>
+        <a href="#kurumsal" class="link-underline pb-1">Kurumsal</a>
+        <a href="#hizmetler" class="link-underline pb-1">Hizmetler</a>
+        <a href="#blog" class="link-underline pb-1">Blog</a>
+        <a href="#iletisim" class="link-underline pb-1">İletişim</a>
       </nav>
 
       <!-- Sağ Hızlı Eylem -->
       <div class="flex items-center gap-3 sm:gap-4">
-        <a href="tel:+905398500753" class="hidden sm:flex items-center gap-2 text-[13px] font-semibold text-ink/85 hover:text-ink">
-          <i class="fa-solid fa-phone text-[11px] text-pine"></i>0539 850 07 53
+        <a href="tel:+905398500753" class="nav-phone hidden sm:flex items-center gap-2 text-[13px] font-semibold">
+          <i class="fa-solid fa-phone text-[11px]"></i>0539 850 07 53
         </a>
-        <a href="#fiyat-hesapla" class="btn-primary text-[12.5px] sm:text-[13px] font-semibold px-4 sm:px-5 py-2.5 sm:py-3 rounded-full">Fiyat Hesapla</a>
-        <button type="button" onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 rounded-full border hairline bg-white flex items-center justify-center text-ink" aria-label="Menüyü Aç">
+        <a href="#fiyat-hesapla" class="nav-cta text-[12.5px] sm:text-[13px] font-semibold px-4 sm:px-5 py-2.5 sm:py-3 rounded-full transition">Fiyat Hesapla</a>
+        <button type="button" onclick="toggleMobileMenu()" class="mobile-toggle lg:hidden w-10 h-10 rounded-full border flex items-center justify-center transition" aria-label="Menüyü Aç">
           <i id="mobileMenuIcon" class="fa-solid fa-bars text-sm"></i>
         </button>
       </div>
     </div>
 
     <!-- Mobil Açılır Menü -->
-    <div id="mobileMenu" class="hidden lg:hidden border-t hairline bg-paper px-5 py-4">
+    <div id="mobileMenu" class="hidden lg:hidden border-t hairline bg-paper px-5 py-4 shadow-xl">
       <nav class="flex flex-col gap-3 text-[14px] font-medium text-ink">
         <a href="#anasayfa" onclick="closeMobileMenu()" class="py-1.5 border-b hairline">Ana Sayfa</a>
         <a href="#kurumsal" onclick="closeMobileMenu()" class="py-1.5 border-b hairline">Kurumsal</a>
@@ -247,13 +303,13 @@
 
   <main>
   <!-- 1. ANA SAYFA (Tam Ekran Mimari Hero) -->
-  <section id="anasayfa" class="relative overflow-hidden bg-ink border-b hairline min-h-[580px] lg:min-h-[650px] flex items-center">
+  <section id="anasayfa" class="relative overflow-hidden bg-ink border-b hairline min-h-[640px] lg:min-h-[730px] flex items-center">
     <!-- Tam Ekran Arka Plan Görseli (Batman Modern Site Dairesi) -->
     <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1600&q=80" alt="Batman’da temizlenmiş ferah ve aydınlık daire salonu" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover object-center">
     <!-- Okunabilirlik İçin Zümrüt & Koyu Gradyan Katmanı -->
     <div class="absolute inset-0" style="background: linear-gradient(100deg, rgba(16, 32, 26, 0.92) 0%, rgba(16, 32, 26, 0.78) 46%, rgba(16, 32, 26, 0.34) 100%);"></div>
 
-    <div class="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-8 py-14 sm:py-20 lg:py-24">
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-8 pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-20 lg:pb-24">
       <div class="max-w-2xl min-w-0 text-white">
         <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[12px] font-medium text-white/90 mb-5 sm:mb-6">
           <span class="w-2 h-2 rounded-full bg-[#6EE7B7] shrink-0"></span>
@@ -1099,24 +1155,42 @@
 
   <!-- Footer -->
   <footer class="bg-ink text-white/60 pt-14 pb-28 lg:pb-14 text-[13px]">
-    <div class="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-      <div class="flex items-center gap-3">
-        <span class="w-9 h-9 rounded-full bg-white text-brandBlue font-extrabold flex items-center justify-center text-sm">GT</span>
-        <div>
-          <span class="font-serif text-white text-[16px] block">Güncel Temizlik</span>
-          <span class="text-[11.5px] text-white/50">Cumhuriyet Mah. Atatürk Blv. Cihan Plaza 76, Kat: 3 No: 20, Merkez / BATMAN</span>
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-8 border-b border-white/10">
+        <div class="flex items-center gap-3.5">
+          <div class="w-11 h-11 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0 shadow-sm">
+            <svg class="w-full h-full" viewBox="0 0 120 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M27 36L35 28H45L47 33H38L34 39L38 45L45 64L28 69L24 50L27 36Z" fill="#1F3A8A"/>
+              <path d="M16 29L24 31M14 35L23 35M17 41L24 39" stroke="#1F3A8A" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M40 20L66 13L68 19L42 26L40 20Z" fill="#1F3A8A"/>
+              <path d="M52 22L58 58" stroke="#1F3A8A" stroke-width="4.5" stroke-linecap="round"/>
+              <path d="M68 25L88 27L83 49L65 47L68 25Z" fill="#1F3A8A"/>
+              <path d="M74 49L72 58" stroke="#1F3A8A" stroke-width="4" stroke-linecap="round"/>
+              <path d="M28 88C16 74 22 57 44 52C64 47 84 52 94 58C79 55 58 53 41 59C26 65 24 77 32 88H28Z" fill="#7CB342"/>
+            </svg>
+          </div>
+          <div>
+            <span class="font-serif text-white text-[17px] block leading-tight">Güncel Temizlik</span>
+            <span class="text-[11.5px] text-white/50">Cumhuriyet Mah. Atatürk Blv. Cihan Plaza 76, Kat: 3 No: 20, Merkez / BATMAN</span>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-6 text-[12.5px]">
+          <a href="#anasayfa" class="hover:text-white transition">Ana Sayfa</a>
+          <a href="#kurumsal" class="hover:text-white transition">Kurumsal</a>
+          <a href="#hizmetler" class="hover:text-white transition">Hizmetler</a>
+          <a href="#blog" class="hover:text-white transition">Blog</a>
+          <a href="#iletisim" class="hover:text-white transition">İletişim</a>
         </div>
       </div>
-      <div class="flex flex-wrap items-center gap-6 text-[12.5px]">
-        <a href="#anasayfa" class="hover:text-white transition">Ana Sayfa</a>
-        <a href="#kurumsal" class="hover:text-white transition">Kurumsal</a>
-        <a href="#hizmetler" class="hover:text-white transition">Hizmetler</a>
-        <a href="#blog" class="hover:text-white transition">Blog</a>
-        <a href="#iletisim" class="hover:text-white transition">İletişim</a>
-      </div>
-      <div class="flex flex-col sm:flex-row sm:items-center gap-4 text-[12px] text-white/45">
-        <button type="button" onclick="openKvkkModal()" class="text-white/70 hover:text-white underline text-left cursor-pointer transition">KVKK Aydınlatma Metni ve Çerez Politikası</button>
-        <span>© 2026 Güncel Temizlik. Tüm hakları saklıdır.</span>
+
+      <div class="pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-[12px] text-white/45">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+          <button type="button" onclick="openKvkkModal()" class="text-white/70 hover:text-white underline text-left cursor-pointer transition">KVKK Aydınlatma Metni ve Çerez Politikası</button>
+          <span>© 2026 Güncel Temizlik. Tüm hakları saklıdır.</span>
+        </div>
+        <div>
+          Tasarım &amp; Geliştirme: <a href="https://kirkyama.uk/tr" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-[#7ED4AD] font-semibold underline underline-offset-4 transition">kırkyama</a>
+        </div>
       </div>
     </div>
   </footer>
@@ -1831,6 +1905,19 @@
         closeKvkkModal();
       }
     });
+
+    function updateHeaderScroll() {
+      const header = document.getElementById('siteHeader');
+      if (!header) return;
+      if (window.scrollY > 40) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', updateHeaderScroll, { passive: true });
+    updateHeaderScroll();
 
     calculatePrice();
     switchTab('mutfak', document.querySelector('.tab-pill'));
